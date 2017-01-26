@@ -1,42 +1,40 @@
 // gui params
 var myColor = 30;
-
 var gui;
 
+// physics params
 var inc = 0.1;
-var scl = 20;
+var scl = 100;
 var cols, rows;
 var zoff = 0;
 
-
+// arrays
 var particles = [];
 var flowfield = [];
 
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
 
   // Create the GUI
-  sliderRange(0, 90, 1);
-  gui = createGui('slider');
-  gui.addGlobals('myColor');
+//   sliderRange(0, 90, 1);
+//   gui = createGui('slider');
+//   gui.addGlobals('myColor');
 
   colorMode(HSB, 100);
-  background(0);
-
-
-
+  background(255);
 
   cols = floor(width / scl);
   rows = floor(height / scl);
 
   flowfield = new Array(cols * rows);
-
-  for (var i = 0; i < 2500; i++) {
+  for (var i = 0; i < 9500; i++) {
     particles[i] = new Particle();
   }
 }
 
 function draw() {
+  // background(255);
 
   var yoff = 0;
   for (var y = 0; y < rows; y++) {
@@ -67,4 +65,5 @@ function draw() {
     particles[i].show();
 
   }
+
 }
