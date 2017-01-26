@@ -32,6 +32,7 @@ function Particle() {
 
   // show result 
   this.show = function() {
+    colorMode(HSB,100);
     stroke(0,5);
     strokeWeight(1);
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
