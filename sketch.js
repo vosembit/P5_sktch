@@ -17,9 +17,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // Create the GUI
-  sliderRange(0, 90, 1);
-  gui = createGui('flow field');
-  gui.addGlobals('scl');
+//   sliderRange(0, 90, 1);
+//   gui = createGui('flow field');
+//   gui.addGlobals('scl');
 
   background(255);
 
