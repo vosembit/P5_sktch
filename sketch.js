@@ -4,7 +4,7 @@ var gui;
 
 // physics params
 var inc = 0.1;
-var scl = 100;
+var scl = 30;
 var cols, rows;
 var zoff = 0;
 
@@ -17,18 +17,17 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // Create the GUI
-//   sliderRange(0, 90, 1);
-//   gui = createGui('slider');
-//   gui.addGlobals('myColor');
+  sliderRange(0, 90, 1);
+  gui = createGui('flow field');
+  gui.addGlobals('scl');
 
-  colorMode(HSB, 100);
   background(255);
 
   cols = floor(width / scl);
   rows = floor(height / scl);
 
   flowfield = new Array(cols * rows);
-  for (var i = 0; i < 9500; i++) {
+  for (var i = 0; i < 4500; i++) {
     particles[i] = new Particle();
   }
 }
