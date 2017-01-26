@@ -1,5 +1,5 @@
-function Particle() {
 
+function Particle() {
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
@@ -7,6 +7,7 @@ function Particle() {
   this.prevPos = this.pos.copy();
   this.clr = 0;
 
+  // update used variables
   this.update = function() {
     this.vel.add(this.acc);
     this.vel.limit(this.maxspeed);
@@ -15,6 +16,7 @@ function Particle() {
     this.clr += 0.1;
   }
 
+  // update used variables
   this.follow = function(vectors) {
     var x = floor(this.pos.x / scl);
     var y = floor(this.pos.y / scl);
@@ -22,19 +24,22 @@ function Particle() {
     var force = vectors[index];
     this.applyForce(force);
   }
+
+  // summary vel to force
   this.applyForce = function(force) {
     this.acc.add(force);
   }
 
+  // show result 
   this.show = function() {
     colorMode(HSB,100);
-    stroke(color(myColor,100,100,5));
+    stroke(0,5);
     strokeWeight(1);
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
-    //point(this.pos.x, this.pos.y);
     this.updatePrev();
   }
-
+  
+  // save prev postition to draw lines 
   this.updatePrev = function() {
     this.prevPos.x = this.pos.x;
     this.prevPos.y = this.pos.y;
