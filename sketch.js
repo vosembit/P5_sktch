@@ -1,5 +1,5 @@
 // gui params
-var myColor = 30;
+var myColor = '#000000';
 var gui;
 
 //var fgcol = '#47584b';
@@ -13,6 +13,8 @@ var scl = 20;
 var inc = 0.05;
 var incz = 0.001;
 var drawing = true;
+var BG_color = '#292929';
+var FG_color = '#00CCFF';
 
 // physics params
 
@@ -33,7 +35,7 @@ function setup() {
     sliderRange(0, 255, 1);
 
     gui = createGui('flow field');
-    gui.addGlobals('fsthue', 'fstsat', 'fstbr', 'reset');
+    gui.addGlobals('BG_color', 'FG_color');
     sliderRange(20, 100, 1);
     gui.addGlobals('scl');
     sliderRange(0, 0.3, 0.001);
@@ -54,12 +56,11 @@ function setup() {
 }
 
 function draw() {
-   background(255);
-if(!reset){
-    clear();
-    reset=false;
-//    background(0);
-}
+//if(!reset){
+//    clear();
+//    reset=false;
+    background(BG_color);
+//}
   var yoff = 0;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
@@ -70,19 +71,15 @@ if(!reset){
       v.setMag(0.1);
       flowfield[index] = v;
       xoff += inc;
-        
-     if(drawing == false){
-         drawlines();
-     }else{
-         
-       stroke(fsthue, fstsat,fstbr);
+          
+       stroke(FG_color);
        strokeWeight(1);
        push();
        translate(x * scl, y * scl);
        rotate(v.heading());
        line(0, 0, scl, 0);
        pop();
-         }
+
     }
     yoff += inc;
     zoff += incz;
@@ -91,16 +88,12 @@ if(!reset){
 
 }
 
-    function drawlines(){
-  for (var i = 0; i < particles.length; i++) {
-    particles[i].follow(flowfield);
-    particles[i].update();
-    particles[i].edges();
-    particles[i].show();
-
-  }
-
-        }
+//  for (var i = 0; i < particles.length; i++) {
+//    particles[i].follow(flowfield);
+//    particles[i].update();
+//    particles[i].edges();
+//    particles[i].show();
+//        }
 
 function reset(){
     clear()
