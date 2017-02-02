@@ -8,7 +8,7 @@ var visible = true;
 
 function setup() {
 
-    bg = loadImage("bg3.png");
+    bg = loadImage("img/bg3.png");
     imageMode(CENTER);
 
     createCanvas(windowWidth, windowHeight);
