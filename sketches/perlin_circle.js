@@ -12,10 +12,6 @@ function setup() {
 	button.position(19, height - 100);
 	button.mousePressed(reset);
 
-	button2 = createButton('save');
-	button2.position(69, height - 100);
-	button2.mousePressed(save);
-
 	gui = createGui('||||||||');
 	sliderRange(0, 1024, 1);
 	gui.addGlobals('crvColor','bgColor','force');
@@ -25,7 +21,9 @@ function setup() {
 }
 
 function draw() {
-	
+	var b = color(bgColor);
+	stroke(red(b),green(b),blue(b),10);
+	background(bgColor);
 	strokeWeight(map(noise(frameCount * 0.02 + 10000), 0, 1, 0.1, 1));
 	var c = color(crvColor);
 	stroke(red(c),green(c),blue(c),10);
@@ -50,9 +48,4 @@ function draw() {
 // clear screen, refresh background, keep settings
 function reset() {
 	background(bgColor);
-}
-
-// save screen
-function save() {
-	save('myCanvas.jpg');
 }
