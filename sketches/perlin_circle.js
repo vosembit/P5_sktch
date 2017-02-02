@@ -1,30 +1,42 @@
-var vertexNum = 7;
+var vertexNum = 3;
 var force = 50;
-var bgColor = '#e1e1e1';
-var crvColor = '#232323';
+var crvColor = '#FFFFFF';
+var first = true;
+var bg;
+var gui;
+var visible = true;
 
 function setup() {
 
-	createCanvas(windowWidth, windowHeight);
-	background(bgColor);
+    bg = loadImage("bg3.png");
+    imageMode(CENTER);
 
+    createCanvas(windowWidth, windowHeight);
+    background(bg);
+
+    buttonM = createButton('menu');
+	buttonM.position(29, height - 100);
+	buttonM.mousePressed(menu);
+    
 	button = createButton('reset');
-	button.position(19, height - 100);
+	button.position(89, height - 100);
 	button.mousePressed(reset);
 
 	gui = createGui('||||||||');
 	sliderRange(0, 1024, 1);
-	gui.addGlobals('crvColor','bgColor','force');
-	sliderRange(4, 64, 1);
+	gui.addGlobals('crvColor','force');
+	sliderRange(3, 21, 1);
 	gui.addGlobals('vertexNum','tracking');
+    background(bg);
 
-}
+    reset();
+    gui.hide();
+    first = true;
+    }
 
 function draw() {
-	var b = color(bgColor);
-	stroke(red(b),green(b),blue(b),10);
-	background(bgColor);
-	strokeWeight(map(noise(frameCount * 0.02 + 10000), 0, 1, 0.1, 1));
+
+    strokeWeight(map(noise(frameCount * 0.02 + 10000), 0, 1, 0.1, 1));
 	var c = color(crvColor);
 	stroke(red(c),green(c),blue(c),10);
 	noFill();	
@@ -44,8 +56,14 @@ function draw() {
 	endShape();
 
 }
-
+function menu() {
+  
+         visible = !visible;
+      if(visible) gui.show(); else gui.hide();
+  
+}
+ 
 // clear screen, refresh background, keep settings
 function reset() {
-	background(bgColor);
+	background(bg);
 }
