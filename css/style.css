@@ -1,8 +1,27 @@
+.preloader{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:white;
+  z-index:99999;
+}
+ 
+.preloader .item{
+  position:absolute;
+  width:100px;
+  height:100px;
+  left:50%;
+  top:50%;
+  margin-left:-50px;
+  margin-top:-50px;
+} 
+
+
 html, body{
 	font-family: 'Oswald', sans-serif;
 	font-size:15px;
 	-webkit-font-smoothing: subpixel-antialiased!important;
-	background:black;
+	background:#181818;
 	color:black;
 	font-weight:400;
 	height:100%;
@@ -10,13 +29,19 @@ html, body{
 
 a{
 	text-decoration:none;
+    color:white;
 	outline:none;
+    font-weight:300;
+	letter-spacing:1px;
 	font-size:14px;
 }
 
+a:hover {
+    color: hotpink;
+}
 h1{
 	font-size:48px;
-	color:white;
+	color:black;
 	font-weight:400;
 	text-transform:uppercase; 
 	/*  letter-spacing:6px;*/
@@ -25,19 +50,36 @@ h1{
 
 p{
 	font-size:14px;
-	color:white;
+	color:ghostwhite;
 	font-weight:300;
 	letter-spacing:1px;
-	margin-top:40px;
+	margin-top:20px;
 }
 
 .container{
   position:absolute;
-  width:100%;
   height:100%;
+    width: 800px;
+    margin: auto;
 }
 
+.logo{
+    color:black;
+    width: 70px;
+    margin-top:60px;
+    margin-left: 20px;
+}
 
+.logo a {
+    font-size: 14px;
+    text-align:left;
+    line-height:18px;
+    letter-spacing:1px;
+    color: #FFF;
+}
+.logo a:hover {
+    color: hotpink;
+}
 /* Portfolio */
 
 
@@ -60,7 +102,7 @@ p{
 /* Portfolio grid */
 
 .grid{
-  margin-top:70px;
+  margin-top:20%;
   width:100%;
   position:relative;
   margin-bottom:70px;
@@ -85,55 +127,37 @@ p{
   position: absolute;
   width: 285px;
   height:100%;
-  background: rgba(0,156,255,1);
+  background: rgba(0,0,0,1);
   z-index: 2;
   opacity:0;
-    -webkit-transition: all 0.6s ease-in;
-	-moz-transition: all 0.6s ease-in;
-	-ms-transition: all 0.6s ease-in;
-	-o-transition: all 0.6s ease-in;
-	transition: all 0.6s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+	-moz-transition: all 0.3s ease-in;
+	-ms-transition: all 0.3s ease-in;
+	-o-transition: all 0.3s ease-in;
+	transition: all 0.3s ease-in;
 }
 
 .grid .text:hover {
   opacity:1;
 }
 
-.grid .no-text {
-  position: absolute;
-  width: 285px;
-  height:100%;
-  background: rgba(0,156,255,0.5);
-  z-index: 2;
-  opacity:0;
-  -webkit-transition: all 0.6s ease-in;
-	-moz-transition: all 0.6s ease-in;
-	-ms-transition: all 0.6s ease-in;
-	-o-transition: all 0.6s ease-in;
-	transition: all 0.6s ease-in;
-}
-
-.grid .no-text:hover {
-  opacity:1;
-}
-
 .grid p {
-  font-size: 18px;
-  text-align:center;
-  line-height:26px;
-  margin-top:40px;
-  font-weight: bold;
-  letter-spacing:1px;
-  color: #FFF;
+    font-size: 18px;
+    text-align:left;
+    margin-left:20px;
+    line-height:26px;
+    font-weight: bold;
+    letter-spacing:1px;
+    color: #FFF;
 }
 
 .grid p.description {
-  font-size: 12px;
-  width:300px;
-  margin-top:20px;
-  text-align:center;
-  line-height:20px;
-  font-weight: 400;
-  color: #FFF;
-  position:relative;
+    font-size: 12px;
+    width:300px;
+    margin-left:20px;
+    text-align:left;
+    line-height:20px;
+    font-weight: 400;
+    color: #FFF;
+    position:relative;
 }
