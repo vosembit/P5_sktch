@@ -1,26 +1,13 @@
-img{
-  width:100%;
-  height:auto;
-}
-.logo	{
-	margin: 10px 0 30px 0;
-	padding: 20px 20px 20px 0px;
-}
-.sktch-title {
-	padding: 20px 15px 15px 15px;
-}
-.sktch-title:hover {
-	transition: .25s all;
-}
 body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
 .footer {
-    position: fixed;
-    height: 20%;
-    bottom: 0;
-    width: 100%;
+	position: fixed;
+	height: 20%;
+	bottom: 0;
+	width: 100%;
 }
