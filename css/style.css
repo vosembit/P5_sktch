@@ -5,6 +5,11 @@ body {
 	align-items: center;
 }
 
+img {
+	width: 100%;
+	height: auto;
+}
+
 .footer {
 	position: fixed;
 	height: 20%;
