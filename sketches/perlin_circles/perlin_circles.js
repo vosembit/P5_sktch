@@ -1,11 +1,11 @@
 var vertexNum = 3;
 var force = 70;
-var crvColor = '#49acf5';
-var gui;
-var visible = false;
 var inc = 1;
-var cnv;
+var crvColor = '#49acf5';
+var visible = false;
 var bgcol = true;
+var gui, cnv;
+
 
 function setup() {
 	cnv = createCanvas(windowWidth, windowHeight);
@@ -57,10 +57,10 @@ function bg_inverse() {
 	reset();
 	if (bgcol == true) {
 		document.body.style.backgroundColor = "#fff";
-		document.getElementById("myH1").style.color = "black";
+		document.getElementById("sk_title").style.color = "black";
 	} else {
 		document.body.style.backgroundColor = "#333";
-		document.getElementById("myH1").style.color = "white";
+		document.getElementById("sk_title").style.color = "white";
 	}
 }
 
