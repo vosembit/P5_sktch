@@ -45,5 +45,3 @@ function centerCanvas() {
 function windowResized() {
 	centerCanvas();
 }
-
-
