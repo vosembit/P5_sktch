@@ -128,18 +128,16 @@ function bg_inverse() {
 	if (inverse == true) {
 		BG_color = '#333333';
 		FG_color = '#FFFFFF';
-		document.body.style.backgroundColor = "#333333";
-		document.getElementById("myH1").style.color = "#FFFFFF";
+		document.body.style.backgroundColor = BG_color;
+		document.getElementById("sk_title").style.color = FG_color;
 	} else {
 		BG_color = '#FFFFFF';
 		FG_color = '#333333';
-		document.body.style.backgroundColor = "#FFFFFF";
-		document.getElementById("myH1").style.color = "#333333";
+		document.body.style.backgroundColor = BG_color;
+		document.getElementById("sk_title").style.color = FG_color;
 	}
 	reset();
 }
-
-
 
 function windowResized() {
 	centerCanvas();
