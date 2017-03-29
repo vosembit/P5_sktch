@@ -7,11 +7,7 @@ var n2 = 0.3;
 var n3 = 0.3;
 var radius = 200;
 var total = 500;
-var cnv;
-var slider;
-var mySpan;
-var pxm;
-var xm;
+var cnv, slider, pxm, xm;
 
 function setup() {
 	cnv = createCanvas(windowWidth, windowHeight);
@@ -114,6 +110,6 @@ function windowResized() {
 	centerCanvas();
 }
 
-function saveF()	{
-	saveCanvas(cnv,'supershape_' + frameCount, 'jpg');
+function saveF() {
+	saveCanvas(cnv, 'supershape_' + frameCount, 'jpg');
 }
