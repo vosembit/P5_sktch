@@ -1,9 +1,7 @@
 var c = false; //	swicth color mode
-var trails = true; //	refresh background sitch
-var num = 3; //	number of shapes
-var numl = 0; //	number of shapes
+var num = 3; 
+var numl = 0; 
 
-//var x, y, xx, yy, xl, yl, a, aa, al, t1, t2, h;
 var x = 0; //	number of shapes
 var y = 0; //	number of shapes
 var xx = 0; //	number of shapes
@@ -28,12 +26,9 @@ function setup() {
 	fill(196, 1.5);
 	strokeWeight(0.5);
 	document.getElementById("sk_title").style.color = "white";
-
-
 }
 
 function draw() {
-
 	if (millis() - t1 > random(7000, 15000)) {
 		a = random(-TWO_PI, TWO_PI);
 		xx = random(-600, 600);
@@ -51,13 +46,11 @@ function draw() {
 		yy = random(-600, 600);
 		t2 = millis();
 	}
-
 	if (c) {
 		colorMode(HSB, 255);
 		stroke(h, 255, 255);
 		h += ih;
 		if (h > 255 || h < 0) ih = -ih;
-
 	} else {
 		stroke(0);
 	}
@@ -72,36 +65,29 @@ function draw() {
 		}
 		pop();
 	}
-
 	xl = lerp(xl, xx, 0.001);
 	yl = lerp(yl, yy, 0.01);
 	numl = lerp(numl, num, 0.001);
 	al = lerp(al, a, 0.001);
 }
-
 function mousePressed() {
 	num = int(random(1, 4));
 	a = random(-TWO_PI, TWO_PI);
 	xx = random(-600, 600);
 	yy = random(-600, 600);
 }
-
 function centerCanvas() {
 	var x = (windowWidth - width) / 2;
 	var y = ((windowHeight - height) / 2);
 	cnv.position(x, y);
 }
-
 function windowResized() {
 	centerCanvas();
 }
-
 function restart() {
 	background(0);
 	num = int(random(0, mn));
-
 }
-
 function saveF() {
 	saveCanvas(cnv, 'supershape_' + frameCount, 'jpg');
 }
