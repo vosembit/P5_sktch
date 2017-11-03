@@ -65,6 +65,7 @@ function draw() {
 
 			if (vectors == true) {
 				var c = color(FG_color);
+				background(BG_color);
 				stroke(hue(c), saturation(c), brightness(c));
 				strokeWeight(1);
 				push();
@@ -89,7 +90,6 @@ function draw() {
 			break;
 
 		case 'vectors':
-			background(BG_color);
 			vectors = true;
 			break;
 
