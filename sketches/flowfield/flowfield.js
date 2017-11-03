@@ -82,7 +82,7 @@ function draw() {
 
 		case 'particles':
 			vectors = false;
-// 			background(BG_color);
+			background(BG_color);
 			var c = color(FG_color);
 			stroke(hue(c), saturation(c), brightness(c));
 			particals();
@@ -90,7 +90,7 @@ function draw() {
 
 		case 'vectors':
 			vectors = true;
-			background(BG_color);
+// 			background(BG_color);
 			break;
 
 		case 'tracking':
