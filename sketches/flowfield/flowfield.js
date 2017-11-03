@@ -90,7 +90,7 @@ function draw() {
 
 		case 'vectors':
 			vectors = true;
-// 			background(BG_color);
+			background(BG_color);
 			break;
 
 		case 'tracking':
