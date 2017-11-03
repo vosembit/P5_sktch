@@ -65,7 +65,6 @@ function draw() {
 
 			if (vectors == true) {
 				var c = color(FG_color);
-				
 				stroke(hue(c), saturation(c), brightness(c));
 				strokeWeight(1);
 				push();
@@ -83,7 +82,7 @@ function draw() {
 
 		case 'particles':
 			vectors = false;
-			background(BG_color);
+// 			background(BG_color);
 			var c = color(FG_color);
 			stroke(hue(c), saturation(c), brightness(c));
 			particals();
