@@ -89,6 +89,7 @@ function draw() {
 			break;
 
 		case 'vectors':
+			background(BG_color);
 			vectors = true;
 			break;
 
