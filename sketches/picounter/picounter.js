@@ -50,8 +50,8 @@ function quantum() {
 	fill(0);
 	ellipse(200, 200, 400, 400);	
 	
-	x = Math.random(0, 401);
-	y = Math.random(0, 401);
+	x = random(0, 401);
+	y = random(0, 401);
 	target = get(x, y);
 
 	fill(random(125, 255), 0, random(125, 255));
