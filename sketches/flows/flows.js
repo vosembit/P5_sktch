@@ -5,7 +5,7 @@ var nums = 1200;
 var noiseScale = 1800;
 
 function setup() {
-    cnv = createCanvas(windowWidth, windowHeight+200);
+    cnv = createCanvas(windowWidth, windowHeight + 200);
     cnv.parent('sketch-holder');
     centerCanvas();
     slider1 = document.getElementById("slider1");
@@ -75,7 +75,12 @@ function Particle(x, y) {
 }
 
 function restart() {
-	background(0);
+    background(0);
+    for (var i = 0; i < nums; i++) {
+        particles_a[i] = new Particle(random(0, width), random(0, height));
+        particles_b[i] = new Particle(random(0, width), random(0, height));
+        particles_c[i] = new Particle(random(0, width), random(0, height));
+    }
 }
 
 function centerCanvas() {
