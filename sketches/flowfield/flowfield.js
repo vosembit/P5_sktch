@@ -1,6 +1,6 @@
 var gui;
 var BG_color = '#ffffff';
-var FG_color = '#333333';
+var FG_color = '#000000';
 var vectors = false;
 var scl = 40;
 var dots = 1500;
