@@ -131,13 +131,13 @@ function reset() {
 function bg_inverse() {
 	inverse = !inverse;
 	if (inverse == true) {
-		BG_color = '#333333';
+		BG_color = '#000000';
 		FG_color = '#FFFFFF';
 		document.body.style.backgroundColor = BG_color;
 		document.getElementById("sk_title").style.color = FG_color;
 	} else {
 		BG_color = '#FFFFFF';
-		FG_color = '#333333';
+		FG_color = '#000000';
 		document.body.style.backgroundColor = BG_color;
 		document.getElementById("sk_title").style.color = FG_color;
 	}
