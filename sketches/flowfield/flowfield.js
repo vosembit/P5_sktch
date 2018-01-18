@@ -122,6 +122,10 @@ function menu() {
 function reset() {
 	if (inverse == true) background(BG_color);
 	else background(BG_color);
+		flowfield = new Array(cols * rows);
+	for (var i = 0; i < 2001; i++) {
+		particles[i] = new Particle();
+	}
 }
 
 function bg_inverse() {
