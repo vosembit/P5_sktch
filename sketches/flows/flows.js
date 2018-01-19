@@ -12,7 +12,7 @@ function setup() {
     centerCanvas();
     slider1 = document.getElementById("slider1");
     slider2 = document.getElementById("slider2");
-    colorMode = (HSB, 360,100,100);
+    colorMode = (HSB, 255);
     background(0);
 
     for (var i = 0; i < nums; i++) {
