@@ -5,7 +5,9 @@ var nums = 1200;
 var noiseScale = 1800;
 
 function setup() {
-    cnv = createCanvas(windowWidth, windowHeight + 200);
+//     cnv = createCanvas(windowWidth, windowHeight + 200);
+    cnv = createCanvas(3840, 2160);
+
     cnv.parent('sketch-holder');
     centerCanvas();
     slider1 = document.getElementById("slider1");
