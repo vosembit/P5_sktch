@@ -31,8 +31,8 @@ function draw() {
         var radius = map(i, 0, nums, 1, 2);
         var alpha = map(i, 0, nums, 0, 250);
 
-//         fill(69, 33, 124, alpha);
-        fill(264, 73, 49, alpha);
+        fill(69, 33, 124, alpha);
+//         fill(264, 73, 49, alpha);
         particles_a[i].move();
         particles_a[i].display(radius);
         particles_a[i].checkEdge();
