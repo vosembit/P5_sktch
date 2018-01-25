@@ -80,10 +80,15 @@ function Particle(x, y) {
 
 function restart() {
     background(0);
-    for (var i = 0; i < nums; i++) {
-        particles_a[i] = new Particle(random(0, width), random(0, height));
-        particles_b[i] = new Particle(random(0, width), random(0, height));
-        particles_c[i] = new Particle(random(0, width), random(0, height));
+//     for (var i = 0; i < nums; i++) {
+//         particles_a[i] = new Particle(random(0, width), random(0, height));
+//         particles_b[i] = new Particle(random(0, width), random(0, height));
+//         particles_c[i] = new Particle(random(0, width), random(0, height));
+//     }
+        for (var i = 0; i < nums; i++) {
+        particles_a[i] = new Particle(Math.random()*width, Math.random()*height);
+        particles_b[i] = new Particle(Math.random()*width, Math.random()*height);
+        particles_c[i] = new Particle(Math.random()*width, Math.random()*height);
     }
 }
 
