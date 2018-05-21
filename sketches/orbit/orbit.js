@@ -61,12 +61,12 @@ function draw() {
     //  planets
     calcSpeed();
 
-//    drawPlanet(merOrbit, 88);
-//    drawPlanet(venOrbit, 225);
-//    drawPlanet(earOrbit, 365);
+   drawPlanet(merOrbit, 88);
+   drawPlanet(venOrbit, 225);
+   drawPlanet(earOrbit, 365);
 
     if (step == 1) {
-        drawLine(venOrbit, earOrbit, 225, 365);
+//         drawLine(venOrbit, earOrbit, 225, 365);
         step = 0;
     }
     pop();
