@@ -45,7 +45,7 @@ function setup() {
 
 function draw() {
     //    background(0, 15);
-//    background(0);
+   background(0);
 
     step = step + 1;
     print(step);
