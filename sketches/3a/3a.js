@@ -26,6 +26,7 @@ function setup() {
 	fill(196, 1.5);
 	strokeWeight(0.5);
 	document.getElementById("sk_title").style.color = "white";
+    
 }
 
 function draw() {
