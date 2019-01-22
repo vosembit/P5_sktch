@@ -20,11 +20,13 @@ div.red {
 
 div.bg {
     background-color: #fff;
-    color: white;
-
 }
 
 body {
     background-color: #fff;
 
+}
+
+.mui-container{
+    margin-top: 3%;
 }
