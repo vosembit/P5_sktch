@@ -112,5 +112,5 @@ function chooseTiling() {
 
 
 function saveF() {
-    saveCanvas(canvas, 'star_pattern_' + frameCount, 'jpg');
+    saveCanvas(canvas, 'ang_' + angle.toFixed(2) + '_del_' + delta.toFixed(2) + '_lev_' + level + '_til_' + tilingTypeSelect.value(), 'jpg');
 }
