@@ -4,9 +4,10 @@ var particles_c = [];
 var nums = 1200;
 var noiseScale = 1800;
 
+
 function setup() {
     cnv = createCanvas(windowWidth, windowHeight + 200);
-//     cnv = createCanvas(3840, 2160);
+    //     cnv = createCanvas(3840, 2160);
 
     cnv.parent('sketch-holder');
     centerCanvas();
@@ -27,12 +28,12 @@ function draw() {
     smooth();
     nums = slider1.value;
     noiseScale = slider2.value;
+
     for (var i = 0; i < nums; i++) {
         var radius = map(i, 0, nums, 1, 2);
         var alpha = map(i, 0, nums, 0, 250);
 
         fill(69, 33, 124, alpha);
-//         fill(264, 73, 49, alpha);
         particles_a[i].move();
         particles_a[i].display(radius);
         particles_a[i].checkEdge();
@@ -54,7 +55,6 @@ function Particle(x, y) {
     this.dir = createVector(0, 0);
     this.vel = createVector(0, 0);
     this.pos = createVector(x, y);
-//    this.speed = random(0.1, 0.4);
     this.speed = random(0.2, 0.9);
 
     this.move = function () {
@@ -78,17 +78,19 @@ function Particle(x, y) {
     }
 }
 
+
+
+
+
+
+
 function restart() {
     background(0);
-//     for (var i = 0; i < nums; i++) {
-//         particles_a[i] = new Particle(random(0, width), random(0, height));
-//         particles_b[i] = new Particle(random(0, width), random(0, height));
-//         particles_c[i] = new Particle(random(0, width), random(0, height));
-//     }
-        for (var i = 0; i < nums; i++) {
-        particles_a[i] = new Particle(Math.random()*width, Math.random()*height);
-        particles_b[i] = new Particle(Math.random()*width, Math.random()*height);
-        particles_c[i] = new Particle(Math.random()*width, Math.random()*height);
+
+    for (var i = 0; i < nums; i++) {
+        particles_a[i] = new Particle(Math.random() * width, Math.random() * height);
+        particles_b[i] = new Particle(Math.random() * width, Math.random() * height);
+        particles_c[i] = new Particle(Math.random() * width, Math.random() * height);
     }
 }
 

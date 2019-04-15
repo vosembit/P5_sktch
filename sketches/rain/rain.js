@@ -1,32 +1,54 @@
 var drops = [];
-function setup() {
-	cnv = createCanvas(960, 600);
-	cnv.parent('sketch-holder');
-	centerCanvas();
+var dropsCount = 200;
+var cnv;
+var alph = 127;
+
+function preload() {
+    img = loadImage('rain/street.jpg');
 }
+
+function setup() {
+    cnv = createCanvas(windowWidth, windowHeight);
+    cnv.parent('sketch-holder');
+    centerCanvas();
+}
+
 function draw() {
-    background(255);
-      for (var i = 0; i < drops.length; i++) {
+    image(img, 0, 0, windowWidth, windowHeight);
+    for (var i = 0; i < drops.length; i++) {
         drops[i].fall();
         drops[i].show();
-      }
+
+    }
 }
-function rainOn(){
-    for(var i = 0; i < 500; i++)    {
+
+function rainAdd() {
+    for (var i = 0; i < dropsCount; i++) {
         drops.push(new Drop());
+        alph = 127;
     }
 }
-function rainOff(){
-    for(var i = 0; i < 500; i++)    {
-        drops.splice(0,1);
+
+function rainRem() {
+    for (var i = 0; i < drops.length; i++) {
+        drops.splice(0, 1);
     }
 }
+
+function pauseRain() {
+    alph = 0;
+}
+function playRain() {
+    alph = 127;
+}
+
+
 function centerCanvas() {
-	var x = (windowWidth - width) / 2;
-	var y = ((windowHeight - height) / 2);
-	cnv.position(x, y);
+    var x = (windowWidth - width) / 2;
+    var y = ((windowHeight - height) / 2);
+    cnv.position(x, y);
 }
 
 function windowResized() {
-	centerCanvas();
+    centerCanvas();
 }

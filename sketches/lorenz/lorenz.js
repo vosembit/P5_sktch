@@ -24,8 +24,8 @@ var mrty = 0;
 var msc = 10;
 
 var inf = false;
-
-
+var sav = false;
+var mot = false;
 
 function setup() {
     cnv = createCanvas(windowWidth, windowHeight, WEBGL);
@@ -37,11 +37,12 @@ function draw() {
     background(0);
     lore();
     noFill();
-    rtx += 0.004;
-    rthu += 0.01;
+
     scale(msc);
     rotateY(mrty + rtx);
     rotateX(mrtx);
+    rthu += 0.01;
+
     ambientLight(255);
 
     for (var i = 0; i < nx.length; i++) {
@@ -54,6 +55,13 @@ function draw() {
         translate(-nx[i], -ny[i], -nz[i]);
         sphere(0.1);
         pop();
+    }
+    if(sav){
+        saveCanvas(cnv,'lorenz_####.png');
+        sav = !sav;
+    }
+    if(mot){
+        rtx += 0.004;
     }
 }
 
@@ -90,11 +98,16 @@ function lore() {
 function infi() {
     inf = !inf;
     x = 0.01;
-    y = 0;
-    z = 0;
-    nx = [];
-    ny = [];
-    nz = [];
+
+}
+function refresh() {
+     x = 0.01;
+     y = 0;
+     z = 0;
+     nx = [];
+     ny = [];
+     nz = [];
+
 }
 
 
@@ -106,4 +119,11 @@ function centerCanvas() {
 
 function windowResized() {
     centerCanvas();
+}
+
+function saveF(){
+    sav = !sav;
+}
+function motion(){
+    mot = !mot;
 }
