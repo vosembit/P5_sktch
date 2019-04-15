@@ -1,10 +1,6 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /*    background-image: url("picounter.jpg");*/
     background-color: black;
+    color: white;
 }
 
 img {
@@ -12,15 +8,34 @@ img {
     height: auto;
 }
 
-.footer {
-    position: fixed;
-    height: 30%;
-    bottom: 0;
-    width: 100%;
+.mdl-button {
+    margin-top: 5px !important;
+    color: #828282 !important;
 }
 
-
-* {
-    box-sizing: border-box;
+.ff {
+    margin-top: 30% !important;
 }
 
+.container {
+    height: auto;
+    margin: 3%;
+}
+
+.mdl-slider__background-upper {
+    background: rgba(255, 255, 255, .26);
+    transition: left .18s cubic-bezier(.4, 0, .2, 1);
+}
+
+#sketch-holder {
+    position: absolute;
+    z-index: -99;
+}
+
+.sized {
+    width: 100%!important;
+}
+
+.logo{
+    color: #828282;
+}
