@@ -24,8 +24,8 @@ function draw() {
     translate(width/2, height/2);
     ellipseMode(CENTER);
     
-    stroke(0);
-    fill(255);
+    stroke(255);
+    noFill();
     ellipse(0, 0, L, L);
 }
 
