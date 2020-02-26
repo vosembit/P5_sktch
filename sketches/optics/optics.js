@@ -1,55 +1,32 @@
 var cnv;
-var poly;
 
-var polys = [];
+var A = 60;
+var L = 10;
 
-var angle = 60;
-var delta = 10;
-
-var angleSlider;
-var deltaSlider;
+var ASlider;
+var LSlider;
 
 function setup() {
-    //    cnv = createCanvas(windowWidth, windowHeight);
     cnv = createCanvas(600, 600);
     cnv.parent('sketch-holder');
     centerCanvas();
     background(51);
 
-    deltaSlider = document.getElementById("deltaSlider");
-    angleSlider = document.getElementById("angleSlider");
+    LSlider = document.getElementById("deltaSlider");
+    ASlider = document.getElementById("angleSlider");
 
-    var inc = 100;
-
-    for (var x = 0; x < width; x += inc) {
-        for (var y = 0; y < height; y += inc) {
-            var poly = new Polygon();
-            poly.addVertex(x, y);
-            poly.addVertex(x + inc, y);
-            poly.addVertex(x + inc, y + inc);
-            poly.addVertex(x, y + inc);
-            poly.close();
-            polys.push(poly);
-        }
-    }
 }
-
-
 
 function draw() {
     background(51);
-
-    angle = angleSlider.value;
-    delta = deltaSlider.value;
-
-    for (var i = 0; i < polys.length; i++) {
-
-        polys[i].hankin();
-        polys[i].show();
-
-    }
-
-
+    A = ASlider.value;
+    L = LSlider.value;
+    translate(width/2, height/2);
+    ellipseMode(CENTER);
+    
+    stroke(0);
+    fill(255);
+    ellipse(0, 0, L, L);
 }
 
 
@@ -65,5 +42,5 @@ function windowResized() {
 }
 
 function saveF() {
-    saveCanvas(cnv, 'star_pattern' + frameCount, 'jpg');
+    saveCanvas(cnv, 'optics_' + frameCount, 'jpg');
 }
