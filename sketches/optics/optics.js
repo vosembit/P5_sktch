@@ -1,149 +1,244 @@
-var cnv;
+let cnv;
+let ASlider;
+let LSlider;
 
-var A = 60;
-var L = 10;
-var D = 0;
-var LV = 300;
+let inX1, inY1, inX2, inY2;
 
-var ASlider;
-var LSlider;
+let LV = 300;
+let ANG = 60;
+let LEN = 3;
+let DIAM;
+let AB, BC;
+let mode = 0;
+let a, b;
+let inch;
 
-var x1 = 0; // line controlled by mouse
-var y1 = 0;
-var x2 = 10; // fixed end
-var y2 = 10;
+$(document).ready(function () {
+    //  вывод значения слайдера на страницу
+    $('.mdl-slider').on('input', function () {
+        $('#' + $(this).attr("id") + '_text').text($(this).val());
+    });
 
-var x3 = 100; // static line
-var y3 = 300;
-var x4 = 500;
-var y4 = 100;
 
-var intersectionX = 0;
-var intersectionY = 0;
-var intersectionX2 = 0;
-var intersectionY2 = 0;
+    //    // Change background image of a div by clicking on the button
+    //    $("#btn4").click(function () {
+    //        var imageUrl = "optics_bg.jpg";
+    //        $("body").css("background-image", "url(" + imageUrl + ")");
+    //    });
+
+
+});
+
 
 function setup() {
-    cnv = createCanvas(800, 600);
+    cnv = createCanvas(800, 500);
     cnv.parent('sketch-holder');
-    centerCanvas();
     background(51);
-    angleMode()
+
+    ellipseMode(CENTER);
+    angleMode(DEGREES);
+    rectMode(CENTER);
+
     LSlider = document.getElementById("deltaSlider");
     ASlider = document.getElementById("angleSlider");
 
 }
 
 function draw() {
-
     background(51);
 
-    ellipseMode(CENTER);
-    angleMode(DEGREES)
+    ANG = ASlider.value;
+    LEN = LSlider.value;
+    DIAM = (LEN * tan(ANG / 2)) * 2;
+    inch = DIAM * 39.3701;
+    //    AB = 9;
+    //    BC = 16;
 
-    A = ASlider.value;
-    L = map(LSlider.value, 1, 20, 1, dist(0, 0, intersectionX, intersectionY));
-
-    D = (LSlider.value * tan(A / 2)) * 2;
-
-    let v = p5.Vector.fromAngle(radians(A / 2), LV);
-    let vx = v.x;
-    let vy = v.y;
-
-
-    lineLine(vx * LV, vy * LV, vx * LV, -vy * LV, 0, 0, LV, 0);
-    lineLine2(L, height / 2, L, 0, 0, 0, vx * LV, vy * LV, );
-
-
-    //  конус
-    push();
-    translate(100, height / 2);
-    stroke(255);
-    line(0, 0, vx * LV, vy * LV);
-    line(0, 0, vx * LV, -vy * LV);
-    noStroke();
-    fill(255, 32);
-    triangle(0, 0, vx * LV, vy * LV, vx * LV, -vy * LV);
-    //    фокальная плоскость
-    stroke(127);
-    //    line(L, vy * LV, L, -vy * LV);
-    line(0, 0, LV, 0);
-    fill(255);
-    noStroke();
-    ellipse(intersectionX, intersectionY, 5, 5);
-    ellipse(intersectionX2, intersectionY2, 5, 5);
-    ellipse(intersectionX2, -intersectionY2, 5, 5);
-    stroke(127);
-    line(intersectionX2, intersectionY2,intersectionX2, -intersectionY2);
-
-
-    console.log(intersectionX2);
-    pop();
-
-
-    noStroke();
-    fill(255);
-    textSize(14);
-    text("угол: " + A + "\xB0", 100, 50);
-    text("расстояние: " + LSlider.value + " м", 180, 50);
-
-
-    //   проектор
-
-    fill(255);
-    ellipse(100, height / 2, 10, 10);
-    stroke(127);
-    fill(255, 0, 0);
-    ellipse(100 + L, height / 2, 5, 5);
-
-
-    //  результат SPOT
-    noFill();
-    stroke(255);
-    ellipse(600, height / 2, LV, LV);
-    noStroke();
-    fill(255);
-    text("Ø " + parseFloat(D.toFixed(2)) + " м", 600, height / 2);
-
-
-
+    lightCone();
+    SpotResult(mode);
+    info();
 }
+
 
 // LINE/LINE
 function lineLine(x1, y1, x2, y2, x3, y3, x4, y4) {
     // calculate the distance to intersection point
-    var uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
-    var uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    let uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    let uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
     // if uA and uB are between 0-1, lines are colliding
     if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
         // optionally, draw a circle where the lines meet
-        intersectionX = x1 + (uA * (x2 - x1));
-        intersectionY = y1 + (uA * (y2 - y1));
+        inX1 = x1 + (uA * (x2 - x1));
+        inY1 = y1 + (uA * (y2 - y1));
     }
 }
 
 // LINE/LINE
 function lineLine2(x1, y1, x2, y2, x3, y3, x4, y4) {
     // calculate the distance to intersection point
-    var uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
-    var uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    let uA = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
+    let uB = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / ((y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1));
     // if uA and uB are between 0-1, lines are colliding
     if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
         // optionally, draw a circle where the lines meet
-        intersectionX2 = x1 + (uA * (x2 - x1));
-        intersectionY2 = y1 + (uA * (y2 - y1));
+        inX2 = x1 + (uA * (x2 - x1));
+        inY2 = y1 + (uA * (y2 - y1));
     }
 }
 
 
-function centerCanvas() {
-    var x = (windowWidth - width) / 2;
-    var y = ((windowHeight - height) / 2);
-    cnv.position(x, y);
+function lightCone() {
+    let v = p5.Vector.fromAngle(radians(ANG / 2), LV);
+    let vx = v.x;
+    let vy = v.y;
+    lineLine(vx * LV, vy * LV, vx * LV, -vy * LV, 0, 0, LV, 0);
+    L = map(LEN, 1, 20, 1, dist(0, 0, inX1, inY1));
+    lineLine2(L, height / 2, L, 0, 0, 0, vx * LV, vy * LV, );
+    //  конус
+    push();
+    translate(100, height / 2);
+    noStroke();
+    fill(255, 32);
+    triangle(0, 0, vx * LV, vy * LV, vx * LV, -vy * LV);
+    stroke(255);
+    line(0, 0, vx * LV, vy * LV);
+    line(0, 0, vx * LV, -vy * LV);
+    stroke(127);
+    line(0, 0, LV, 0);
+    line(inX2, inY2, inX2, -inY2);
+    fill(255);
+    noStroke();
+    ellipse(0, 0, 10, 10);
+    ellipse(inX1, inY1, 5, 5);
+    ellipse(inX2, inY2, 5, 5);
+    ellipse(inX2, -inY2, 5, 5);
+    fill(255, 0, 0);
+    ellipse(L, 0, 5, 5);
+    pop();
 }
 
+function getMode(i) {
+    mode = i;
+    console.log(mode);
+}
+
+function SpotResult(x) {
+    noFill();
+    stroke(255);
+    switch (x) {
+        case 0:
+            //  результат 16 : 9, a = 60.6422464561
+            a = cos(60.6422464561) * LV;
+            b = sin(60.6422464561) * LV;
+            AB = cos(60.6422464561) * DIAM;
+            BC = sin(60.6422464561) * DIAM;
+            rect(600, height / 2, b, a);
+            noStroke();
+            fill(196);
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 16 : 9    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+            noFill();
+            stroke(255);
+            break;
+        case 1:
+            //  результат 16 : 10, a = 57.9946167919
+            a = cos(57.9946167919) * LV;
+            b = sin(57.9946167919) * LV;
+            AB = cos(57.9946167919) * DIAM;
+            BC = sin(57.9946167919) * DIAM;
+            rect(600, height / 2, b, a);
+            noStroke();
+            fill(196);
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 16 : 10    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+            noFill();
+            stroke(255);
+            break;
+        case 2:
+            //  результат 4 : 3, a = 53.1301023535
+            a = cos(53.1301023535) * LV;
+            b = sin(53.1301023535) * LV;
+            AB = cos(53.1301023535) * DIAM;
+            BC = sin(53.1301023535) * DIAM;
+            rect(600, height / 2, b, a);
+            noStroke();
+            fill(196);
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 4 : 3    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+
+
+            noFill();
+            stroke(255);
+            break;
+        case 3:
+            //  результат 1 : 1, a = 45
+            a = cos(45) * LV;
+            b = sin(45) * LV;
+            AB = cos(45) * DIAM;
+            BC = sin(45) * DIAM;
+            rect(600, height / 2, a, b);
+            noStroke();
+            fill(196);
+
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 1 : 1    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+
+
+
+            noFill();
+            stroke(255);
+            break;
+        case 4:
+            //  результат SPOT
+            strokeWeight(2);
+            ellipse(600, height / 2, LV, LV);
+            strokeWeight(1);
+            noStroke();
+            fill(196);
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: круг    площадь = " + (PI * pow(DIAM, 2) / 4).toFixed(2) + "    проекционный коэффициент = " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+            noFill();
+            stroke(255);
+            break;
+
+        default:
+
+            break;
+    }
+    stroke(96);
+    ellipse(600, height / 2, LV, LV);
+}
+
+function info() {
+    // вывод текстовой информации
+    stroke(96);
+    line(600 - b / 2, height / 2 + a / 2, 600 + b / 2, height / 2 - a / 2);
+    noStroke();
+    fill(196);
+    textSize(12);
+    text("||||||||    габариты проекции от угла и расстояния ", 50, 50);
+
+    if (mode < 4) {
+
+        noStroke();
+        text(parseFloat(BC.toFixed(2)) + " м", 590, height / 2 - a / 2 + 30);
+        text(parseFloat(AB.toFixed(2)) + " м", 620 - b / 2, height / 2);
+
+        fill(96);
+        textSize(18);
+        text(parseFloat(inch.toFixed(1)) + " ''", 620, height / 2 + a / 3);
+
+    } else {
+        fill(196);
+        textSize(12);
+        text("Ø " + parseFloat(DIAM.toFixed(2)) + " м", 600, height / 2 + 20);
+    }
+    fill(196);
+    textSize(12);
+    //    text("угол: " + ANG + "\xB0", 50, 450);
+    //    text("расстояние: " + LEN + " м", 130, 450);
+    //    text("расстояние: " + LEN + " м", 130, 450);
+
+}
+
+
 function windowResized() {
-    centerCanvas();
+    cnv.position(0, 0);
 }
 
 function saveF() {
