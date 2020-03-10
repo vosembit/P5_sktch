@@ -8,6 +8,27 @@ img {
     height: auto;
 }
 
+#dst {
+    /*    background-color: red;*/
+    font-size: 14px;
+    top: 20px;
+    color: white;
+}
+
+.mdl-list__item{
+    color: white;
+    font-size: 14px;
+}
+
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label,
+.mdl-textfield--floating-label.is-dirty .mdl-textfield__label,
+.mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    font-size: 14px;
+    top: -5px;
+}
+
+
+
 .mdl-button {
     margin-top: 5px !important;
     color: #828282 !important;
@@ -19,7 +40,7 @@ img {
 
 .container {
     height: auto;
-    margin: 3%;
+    margin-left: 3%;
 }
 
 .mdl-slider__background-upper {
@@ -33,9 +54,9 @@ img {
 }
 
 .sized {
-    width: 100%!important;
+    width: 100% !important;
 }
 
-.logo{
+.logo {
     color: #828282;
 }
