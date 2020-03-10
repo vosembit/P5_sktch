@@ -12,25 +12,56 @@ let AB, BC;
 let mode = 0;
 let a, b;
 let inch;
+let c1, c2;
+
+let lightS;
+
+let cc;
+
+let i_rat, i_len, i_w, i_h, i_s, i_lux, i_ang, i_mul, i_diag, i_lm;
+
 
 $(document).ready(function () {
     //  вывод значения слайдера на страницу
     $('.mdl-slider').on('input', function () {
         $('#' + $(this).attr("id") + '_text').text($(this).val());
+        setVal();
     });
-
-
-    //    // Change background image of a div by clicking on the button
-    //    $("#btn4").click(function () {
-    //        var imageUrl = "optics_bg.jpg";
-    //        $("body").css("background-image", "url(" + imageUrl + ")");
-    //    });
-
 
 });
 
+function setVal(ab, bc, st) {
+
+    i_rat = st;
+    i_len = LEN;
+    i_ang = ANG;
+    i_mul = (LEN / bc).toFixed(2);
+    i_diag = DIAM.toFixed(2);
+    i_lux = (lightS / (ab * bc)).toFixed(0);
+    i_lm = lightS;
+    i_s = (ab * bc).toFixed(2);
+    i_w = (bc).toFixed(2);
+    i_h = (ab).toFixed(2);
+
+    $('#rat').text(i_rat);
+    $('#mult').text(i_mul);
+    $('#len').text(i_len + " m");
+    $('#lux').text(i_lux + " lux");
+    $('#lm').text(i_lm + " lm");
+    $('#w').text(i_w + " m");
+    $('#h').text(i_h + " m");
+    $('#s').text(i_s + " m2");
+
+    noStroke();
+    fill(164);
+    text("угол: " + i_ang + "\xB0" + "    расстояние: " + i_len + " м" + "    формат: 16 : 9    площадь: " + i_s + "    проекционный коэффициент: " + i_mul + "    диагональ = " + i_diag + " м", 50, 460);
+    text("световой поток: " + i_lm + " lm" + "    освещённость: " + i_lux + " lm/m2", 50, 480);
+
+}
+
 
 function setup() {
+
     cnv = createCanvas(800, 500);
     cnv.parent('sketch-holder');
     background(51);
@@ -41,6 +72,7 @@ function setup() {
 
     LSlider = document.getElementById("deltaSlider");
     ASlider = document.getElementById("angleSlider");
+    BSlider = document.getElementById("lightSlider");
 
 }
 
@@ -49,10 +81,9 @@ function draw() {
 
     ANG = ASlider.value;
     LEN = LSlider.value;
+    lightS = BSlider.value;
     DIAM = (LEN * tan(ANG / 2)) * 2;
     inch = DIAM * 39.3701;
-    //    AB = 9;
-    //    BC = 16;
 
     lightCone();
     SpotResult(mode);
@@ -91,23 +122,38 @@ function lightCone() {
     let v = p5.Vector.fromAngle(radians(ANG / 2), LV);
     let vx = v.x;
     let vy = v.y;
+
+    if (mode == 4) {
+        cc = map(lightS / (PI * pow(DIAM / 2, 2)), 0, 300, 0, 255);
+    } else {
+        cc = map(lightS / (AB * BC), 0, 300, 0, 255);
+
+    }
+
     lineLine(vx * LV, vy * LV, vx * LV, -vy * LV, 0, 0, LV, 0);
     L = map(LEN, 1, 20, 1, dist(0, 0, inX1, inY1));
     lineLine2(L, height / 2, L, 0, 0, 0, vx * LV, vy * LV, );
+
     //  конус
     push();
     translate(100, height / 2);
+
+    beginShape();
     noStroke();
-    fill(255, 32);
-    triangle(0, 0, vx * LV, vy * LV, vx * LV, -vy * LV);
+    fill(255, cc, cc, 15);
+    vertex(0, 0);
+    vertex(vx * LV, vy * LV);
+    vertex(vx * LV, -vy * LV);
+    endShape();
+
     stroke(255);
     line(0, 0, vx * LV, vy * LV);
     line(0, 0, vx * LV, -vy * LV);
     stroke(127);
     line(0, 0, LV, 0);
     line(inX2, inY2, inX2, -inY2);
-    fill(255);
     noStroke();
+    fill(255);
     ellipse(0, 0, 10, 10);
     ellipse(inX1, inY1, 5, 5);
     ellipse(inX2, inY2, 5, 5);
@@ -119,12 +165,10 @@ function lightCone() {
 
 function getMode(i) {
     mode = i;
-    console.log(mode);
 }
 
 function SpotResult(x) {
-    noFill();
-    stroke(255);
+
     switch (x) {
         case 0:
             //  результат 16 : 9, a = 60.6422464561
@@ -132,74 +176,83 @@ function SpotResult(x) {
             b = sin(60.6422464561) * LV;
             AB = cos(60.6422464561) * DIAM;
             BC = sin(60.6422464561) * DIAM;
-            rect(600, height / 2, b, a);
-            noStroke();
-            fill(196);
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 16 : 9    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+
             noFill();
             stroke(255);
+            rect(600, height / 2, b, a);
+
+            setVal(AB, BC, "16 : 9");
             break;
+
         case 1:
             //  результат 16 : 10, a = 57.9946167919
             a = cos(57.9946167919) * LV;
             b = sin(57.9946167919) * LV;
             AB = cos(57.9946167919) * DIAM;
             BC = sin(57.9946167919) * DIAM;
-            rect(600, height / 2, b, a);
-            noStroke();
-            fill(196);
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 16 : 10    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+
             noFill();
             stroke(255);
+            rect(600, height / 2, b, a);
+
+            setVal(AB, BC, "16 : 10");
+
+
             break;
+
         case 2:
             //  результат 4 : 3, a = 53.1301023535
             a = cos(53.1301023535) * LV;
             b = sin(53.1301023535) * LV;
             AB = cos(53.1301023535) * DIAM;
             BC = sin(53.1301023535) * DIAM;
-            rect(600, height / 2, b, a);
-            noStroke();
-            fill(196);
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 4 : 3    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
-
 
             noFill();
             stroke(255);
+            rect(600, height / 2, b, a);
+
+            setVal(AB, BC, "4 : 3");
+
+
             break;
+
         case 3:
             //  результат 1 : 1, a = 45
             a = cos(45) * LV;
             b = sin(45) * LV;
             AB = cos(45) * DIAM;
             BC = sin(45) * DIAM;
-            rect(600, height / 2, a, b);
-            noStroke();
-            fill(196);
-
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: 1 : 1    площадь = " + +(AB * BC).toFixed(2) + "    проекционный коэффициент = " + (LEN / BC).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
-
-
 
             noFill();
             stroke(255);
+            rect(600, height / 2, a, b);
+
+            setVal(AB, BC, "1 : 1");
+
             break;
+
         case 4:
             //  результат SPOT
             strokeWeight(2);
+            noFill();
+            stroke(255);
             ellipse(600, height / 2, LV, LV);
             strokeWeight(1);
             noStroke();
-            fill(196);
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: круг    площадь = " + (PI * pow(DIAM, 2) / 4).toFixed(2) + "    проекционный коэффициент = " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
-            noFill();
-            stroke(255);
+            fill(164);
+
+            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: круг    площадь: " + (PI * pow(DIAM / 2, 2)).toFixed(2) + "    проекционный коэффициент: " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+
+            text("световой поток: " + lightS + " lm" + "    освещённость: " + (lightS / (PI * (DIAM * DIAM) / 4)).toFixed(0) + " lm/m2", 50, 480);
+
             break;
 
         default:
 
             break;
     }
+
+    noFill();
     stroke(96);
     ellipse(600, height / 2, LV, LV);
 }
@@ -212,28 +265,17 @@ function info() {
     fill(196);
     textSize(12);
     text("||||||||    габариты проекции от угла и расстояния ", 50, 50);
-
     if (mode < 4) {
-
         noStroke();
         text(parseFloat(BC.toFixed(2)) + " м", 590, height / 2 - a / 2 + 30);
         text(parseFloat(AB.toFixed(2)) + " м", 620 - b / 2, height / 2);
-
         fill(96);
-        textSize(18);
         text(parseFloat(inch.toFixed(1)) + " ''", 620, height / 2 + a / 3);
 
     } else {
         fill(196);
-        textSize(12);
         text("Ø " + parseFloat(DIAM.toFixed(2)) + " м", 600, height / 2 + 20);
     }
-    fill(196);
-    textSize(12);
-    //    text("угол: " + ANG + "\xB0", 50, 450);
-    //    text("расстояние: " + LEN + " м", 130, 450);
-    //    text("расстояние: " + LEN + " м", 130, 450);
-
 }
 
 
