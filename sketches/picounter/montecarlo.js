@@ -23,9 +23,9 @@ var impact;
 var roboto;
 
 function preload() {
-    bg = loadImage('/data/bg.jpg');
-    impact = loadFont('/data/impact.ttf');
-    roboto = loadFont('/data/roboto.ttf');
+    bg = loadImage('./sketches/picounter/data/bg.jpg');
+    impact = loadFont('./sketches/picounter/data/impact.ttf');
+    roboto = loadFont('./sketches/picounter/data/roboto.ttf');
 }
 
 
