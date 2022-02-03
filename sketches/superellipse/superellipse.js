@@ -109,7 +109,7 @@ function draw() {
 
     for (var i = 0; i < total; i++) {
         var hu = map(i, 0, total, 0, 255 * 2);
-        fill((hu + offset) % 255, 255, (hu + offset) % 255);
+        fill((hu + offset) % 255, 0, (hu + offset) % 255);
         for (var j = 0; j < total + 1; j++) {
             var index = i + j * (total + 1);
             var v = globe[index];
