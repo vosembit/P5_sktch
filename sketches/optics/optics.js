@@ -54,8 +54,8 @@ function setVal(ab, bc, st) {
 
     noStroke();
     fill(164);
-    text("угол: " + i_ang + "\xB0" + "    distance: " + i_len + " м" + "    ratio: 16 : 9    area: " + i_s + "    проекционный коэффициент: " + i_mul + "    диагональ = " + i_diag + " м", 50, 460);
-    text("световой поток: " + i_lm + " lm" + "    освещённость: " + i_lux + " lm/m2", 50, 480);
+    text("angle: " + i_ang + "\xB0" + "    distance: " + i_len + " m" + "    ratio: 16 : 9    area: " + i_s + "    projection coefficient: " + i_mul + "    diagonal = " + i_diag + " m", 50, 460);
+    text("light flow: " + i_lm + " lm" + "    luminosity: " + i_lux + " lm/m2", 50, 480);
 
 }
 
@@ -241,10 +241,9 @@ function SpotResult(x) {
             noStroke();
             fill(164);
 
-            text("угол: " + ANG + "\xB0" + "    distance: " + LEN + " м" + "    shape: circle    area: " + (PI * pow(DIAM / 2, 2)).toFixed(2) + "    проекционный коэффициент: " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
-
-            text("световой поток: " + lightS + " lm" + "    освещённость: " + (lightS / (PI * (DIAM * DIAM) / 4)).toFixed(0) + " lm/m2", 50, 480);
-
+            text("angle: " + ANG + "\xB0" + "    distance: " + LEN + " m" + "    shape: circle    area: " + (PI * pow(DIAM / 2, 2)).toFixed(2) + "    projection coefficient: " + (LEN / DIAM).toFixed(2) + "    diagonal = " + DIAM.toFixed(2) + " m", 50, 460);
+            text("light intensity: " + lightS + " lm" + "    luminosity: " + (lightS / (PI * (DIAM * DIAM) / 4)).toFixed(0) + " lm/m2", 50, 480);
+            
             break;
 
         default:
@@ -264,17 +263,17 @@ function info() {
     noStroke();
     fill(196);
     textSize(12);
-    text("||||||||    габариты проекции от угла и расстояния ", 50, 50);
+    text("||||||||", 50, 50);
     if (mode < 4) {
         noStroke();
-        text(parseFloat(BC.toFixed(2)) + " м", 590, height / 2 - a / 2 + 30);
-        text(parseFloat(AB.toFixed(2)) + " м", 620 - b / 2, height / 2);
+        text(parseFloat(BC.toFixed(2)) + " m", 590, height / 2 - a / 2 + 30);
+        text(parseFloat(AB.toFixed(2)) + " m", 620 - b / 2, height / 2);
         fill(96);
         text(parseFloat(inch.toFixed(1)) + " ''", 620, height / 2 + a / 3);
 
     } else {
         fill(196);
-        text("Ø " + parseFloat(DIAM.toFixed(2)) + " м", 600, height / 2 + 20);
+        text("Ø " + parseFloat(DIAM.toFixed(2)) + " m", 600, height / 2 + 20);
     }
 }
 
