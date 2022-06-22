@@ -54,7 +54,7 @@ function setVal(ab, bc, st) {
 
     noStroke();
     fill(164);
-    text("угол: " + i_ang + "\xB0" + "    расстояние: " + i_len + " м" + "    формат: 16 : 9    площадь: " + i_s + "    проекционный коэффициент: " + i_mul + "    диагональ = " + i_diag + " м", 50, 460);
+    text("угол: " + i_ang + "\xB0" + "    distance: " + i_len + " м" + "    ratio: 16 : 9    area: " + i_s + "    проекционный коэффициент: " + i_mul + "    диагональ = " + i_diag + " м", 50, 460);
     text("световой поток: " + i_lm + " lm" + "    освещённость: " + i_lux + " lm/m2", 50, 480);
 
 }
@@ -241,7 +241,7 @@ function SpotResult(x) {
             noStroke();
             fill(164);
 
-            text("угол: " + ANG + "\xB0" + "    расстояние: " + LEN + " м" + "    формат: круг    площадь: " + (PI * pow(DIAM / 2, 2)).toFixed(2) + "    проекционный коэффициент: " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
+            text("угол: " + ANG + "\xB0" + "    distance: " + LEN + " м" + "    shape: circle    area: " + (PI * pow(DIAM / 2, 2)).toFixed(2) + "    проекционный коэффициент: " + (LEN / DIAM).toFixed(2) + "    диагональ = " + DIAM.toFixed(2) + " м", 50, 460);
 
             text("световой поток: " + lightS + " lm" + "    освещённость: " + (lightS / (PI * (DIAM * DIAM) / 4)).toFixed(0) + " lm/m2", 50, 480);
 
